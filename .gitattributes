@@ -1,0 +1,5 @@
+# Linux image: scripts and Python stay LF even when checked out on Windows
+* text=auto eol=lf
+*.png binary
+*.mp3 binary
+*.onnx binary

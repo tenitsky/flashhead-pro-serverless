@@ -1,0 +1,81 @@
+{
+  "title": "FlashHead Pro - Talking Head Avatars",
+  "description": "One portrait + a voiceover of any length -> a 512x512, 25 fps lip-synced talking-head video with your original audio. SoulX-FlashHead Pro (1.3B, Apache-2.0): about 1.8 s of RTX 5090 time per second of video, 6.4 GB peak VRAM.",
+  "type": "serverless",
+  "category": "video",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 30,
+    "gpuCount": 1,
+    "gpuIds": "ADA_24,AMPERE_24,AMPERE_16,ADA_48_PRO",
+    "allowedCudaVersions": ["12.8", "12.9", "13.0", "13.1", "13.2"],
+    "env": [
+      {
+        "key": "BUCKET_ENDPOINT_URL",
+        "input": {
+          "name": "S3 bucket endpoint URL",
+          "type": "string",
+          "description": "Optional. With a bucket set, finished videos are uploaded there and the job returns a link (S3-compatible: AWS, R2, B2, RunPod S3 API).",
+          "default": "",
+          "advanced": true
+        }
+      },
+      {
+        "key": "BUCKET_ACCESS_KEY_ID",
+        "input": {
+          "name": "S3 access key ID",
+          "type": "string",
+          "description": "Optional, with the bucket endpoint.",
+          "default": "",
+          "advanced": true
+        }
+      },
+      {
+        "key": "BUCKET_SECRET_ACCESS_KEY",
+        "input": {
+          "name": "S3 secret access key",
+          "type": "string",
+          "description": "Optional, with the bucket endpoint.",
+          "default": "",
+          "advanced": true
+        }
+      },
+      {
+        "key": "FLASHHEAD_COMPILE",
+        "input": {
+          "name": "torch.compile",
+          "type": "boolean",
+          "description": "Compile the model: faster chunks, but each new worker spends a few minutes warming up before its first job.",
+          "default": false,
+          "trueValue": "true",
+          "falseValue": "false",
+          "advanced": true
+        }
+      },
+      {
+        "key": "MAX_BASE64_SECONDS",
+        "input": {
+          "name": "Longest video returned as base64 (s)",
+          "type": "number",
+          "description": "Without a bucket or network volume, the video comes back inside the job result; longer voiceovers are refused before rendering.",
+          "min": 5,
+          "max": 120,
+          "default": 30,
+          "advanced": true
+        }
+      },
+      {
+        "key": "MAX_AUDIO_SECONDS",
+        "input": {
+          "name": "Longest voiceover per job (s)",
+          "type": "number",
+          "description": "Set the endpoint's execution timeout to at least 2x this plus a few minutes.",
+          "min": 10,
+          "max": 36000,
+          "default": 10800,
+          "advanced": true
+        }
+      }
+    ]
+  }
+}

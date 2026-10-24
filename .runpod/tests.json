@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "sample_portrait_5_seconds",
+      "input": {
+        "portrait": "sample",
+        "audio": "sample",
+        "max_seconds": 5,
+        "output": "base64"
+      },
+      "timeout": 900000
+    }
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "env": [
+      { "key": "FLASHHEAD_COMPILE", "value": "false" }
+    ],
+    "allowedCudaVersions": ["12.8", "12.9", "13.0", "13.1", "13.2"]
+  }
+}

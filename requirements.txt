@@ -1,0 +1,18 @@
+# Installed on top of the base image's PyTorch, which is pinned with a constraints file in
+# the Dockerfile so nothing here can replace it. Upstream's own requirements.txt is not
+# used: it pins demo and multi-GPU packages (gradio, xformers, xfuser, mediapipe) that one
+# GPU never calls; the engine supplies stand-ins for xfuser and mediapipe.
+runpod==1.12.0
+diffusers==0.36.0
+accelerate>=1.8.1
+transformers==4.57.3
+huggingface_hub
+safetensors
+einops
+loguru
+pyloudnorm
+pyyaml
+pillow
+numpy
+requests
+opencv-python-headless>=4.12.0.88
